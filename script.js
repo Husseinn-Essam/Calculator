@@ -13,6 +13,9 @@ function divi(a, b) {
         return 0;
 
     }
+    else {
+        return a / b
+    }
 }
 function input(Arr, start) {
 
