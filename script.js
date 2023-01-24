@@ -4,7 +4,7 @@ function add(a, b) {
 function sub(a, b) {
     return a - b;
 }
-function mult(a, b) {
+function multi(a, b) {
     return a * b;
 }
 function divi(a, b) {
@@ -23,6 +23,9 @@ function operate(opArr, Arr, mode) {
     }
     else if (mode == "sub") {
         result = sub(opArr[0], opArr[1]);
+    }
+    else if (mode == "multi") {
+        result = multi(opArr[0], opArr[1]);
     }
     opArr.length = 0;
     opArr.push(result);
@@ -86,7 +89,27 @@ subKey.addEventListener('click', () => {
             opArr.push(a);
         }
         console.log(opArr);
-
+    }
+    else {
+        a = input(Arr)
+        //mode = "add";
+        disp.innerText = a;
+        operate(opArr, Arr, mode);
+    }
+})
+multiKey.addEventListener('click', () => {
+    if (mode != "multi") {
+        //clear the input arr and set mode to add
+        if (opArr != 0) {
+            operate(opArr, Arr, mode);
+        }
+        Arr.length = 0;
+        mode = "multi";
+        //if op array doesnt contain a result
+        if (opArr == 0) {
+            opArr.push(a);
+        }
+        console.log(opArr);
     }
     else {
         a = input(Arr)
