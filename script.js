@@ -15,6 +15,16 @@ function input(Arr) {
         return (accum * 10) + digit
     }, 0)
 }
+function operate(opArr, Arr, mode) {
+    Arr.length = 0;
+    opArr.push(a);
+    if (mode == "add") {
+        result = add(opArr[0], opArr[1]);
+    }
+    opArr.length = 0;
+    opArr.push(result);
+    disp.innerText = result;
+}
 const addKey = document.getElementById("add");
 const subKey = document.getElementById("sub");
 const multiKey = document.getElementById("multi");
@@ -50,46 +60,18 @@ addKey.addEventListener('click', () => {
         console.log(opArr);
 
     }
-    else if (!mode && opArr != 0) {
-        a = input(Arr)
-        Arr.length = 0;
-        mode = "add";
-        opArr.push(a);
-        console.log(opArr);
-        result = add(opArr[0], opArr[1]);
-        console.log(result);
-        opArr.length = 0;
-        opArr.push(result);
-        disp.innerText = result;
-
-    }
     else {
         a = input(Arr)
-        disp.innerText = a;
-        Arr.length = 0;
         mode = "add";
-        opArr.push(a);
-        console.log(opArr);
-        result = add(opArr[0], opArr[1]);
-        console.log(result);
-        opArr.length = 0;
-        opArr.push(result);
-        disp.innerText = result;
-
+        disp.innerText = a;
+        operate(opArr, Arr, mode);
     }
 
 })
 equalKey.addEventListener('click', () => {
     a = input(Arr)
     disp.innerText = a;
-    Arr.length = 0;
     mode = "add";
-    opArr.push(a);
-    console.log(opArr);
-    result = add(opArr[0], opArr[1]);
-    console.log(result);
-    opArr.length = 0;
-    opArr.push(result);
-    disp.innerText = result;
+    operate(opArr, Arr, mode);
 
 })
