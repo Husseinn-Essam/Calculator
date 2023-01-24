@@ -11,21 +11,10 @@ function divi(a, b) {
     return b == 0 ? disp.textContent = "ERROR" : a / b;
 }
 function input(Arr, start) {
-    try {
-        if (opArr.length == 0 && mode != null) {
-            throw "empty op"
-        }
-        return Arr.reduce((accum, digit) => {
-            return (accum * 10) + digit
-        })
 
-    }
-    catch (err) {
-        //console.log("ERROR")
-        mode = null;
-        // opArr.length = 0;
-        // opArr[0] = 1;
-    }
+    return Arr.reduce((accum, digit) => {
+        return (accum * 10) + digit
+    }, 0)
 }
 function operate(opArr, Arr, mode) {
     Arr.length = 0;
@@ -55,6 +44,8 @@ const multiKey = document.getElementById("multi");
 const diviKey = document.getElementById("divi");
 const equalKey = document.getElementById("equal");
 const disp = document.getElementById("display");
+const clearKey = document.getElementById("clear");
+const deleteKey = document.getElementById("delete")
 let numKey = document.querySelectorAll(".num");
 
 let Arr = []
@@ -172,4 +163,26 @@ equalKey.addEventListener('click', () => {
         operate(opArr, Arr, mode);
         mode = null;
     }//checks if all inputs are ready ==2
+})
+clearKey.addEventListener('click', () => {
+    opArr.length = 0;
+    Arr.length = 0;
+    a = 0;
+    disp.innerText = a;
+})
+deleteKey.addEventListener('click', () => {
+    if (Arr.length != 0) {
+        Arr.pop()
+        a = input(Arr)
+        if (Arr.length != 0) {
+
+            disp.innerText = a;
+        }
+        else {
+            a = 0;
+            disp.innerText = a;
+        }
+
+    }
+
 })
