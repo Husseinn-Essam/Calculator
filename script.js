@@ -8,7 +8,11 @@ function multi(a, b) {
     return a * b;
 }
 function divi(a, b) {
-    return b == 0 ? disp.textContent = "ERROR" : a / b;
+    if (b == 0) {
+        alert("You can not divide by zero");
+        return 0;
+
+    }
 }
 function input(Arr, start) {
 
@@ -182,7 +186,5 @@ deleteKey.addEventListener('click', () => {
             a = 0;
             disp.innerText = a;
         }
-
     }
-
 })
