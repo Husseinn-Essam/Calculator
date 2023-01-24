@@ -13,10 +13,12 @@ function divi(a, b) {
 function input(Arr) {
     return Arr.reduce((accum, digit) => {
         return (accum * 10) + digit
-    }, 0)
+    })//we have removed the , 0  defualt value i did set for reduce , this fixed th chain problem of multi at a cost of removing the chain of the same op
 }
 function operate(opArr, Arr, mode) {
     Arr.length = 0;
+
+    //a = opArr[0];
     opArr.push(a);
     if (mode == "add") {
         result = add(opArr[0], opArr[1]);
@@ -26,6 +28,9 @@ function operate(opArr, Arr, mode) {
     }
     else if (mode == "multi") {
         result = multi(opArr[0], opArr[1]);
+    }
+    else if (mode == "divi") {
+        result = divi(opArr[0], opArr[1]);
     }
     opArr.length = 0;
     opArr.push(result);
@@ -118,7 +123,27 @@ multiKey.addEventListener('click', () => {
         operate(opArr, Arr, mode);
     }
 })
-
+diviKey.addEventListener('click', () => {
+    if (mode != "divi") {
+        //clear the input arr and set mode to add
+        if (opArr != 0) {
+            operate(opArr, Arr, mode);
+        }
+        Arr.length = 0;
+        mode = "divi";
+        //if op array doesnt contain a result
+        if (opArr == 0) {
+            opArr.push(a);
+        }
+        console.log(opArr);
+    }
+    else {
+        a = input(Arr)
+        //mode = "add";
+        disp.innerText = a;
+        operate(opArr, Arr, mode);
+    }
+})
 
 equalKey.addEventListener('click', () => {
     a = input(Arr)
