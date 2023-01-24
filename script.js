@@ -22,6 +22,7 @@ let numKey = document.querySelectorAll(".num");
 let Arr = []
 let opArr = []
 let a;
+let result = 0;
 
 let mode;
 for (var i = 0; i < 10; i++) {
@@ -77,5 +78,21 @@ addKey.addEventListener('click', () => {
         disp.innerText = result;
 
     }
+
+})
+equalKey.addEventListener('click', () => {
+    a = Arr.reduce((accum, digit) => {
+        return (accum * 10) + digit
+    }, 0)
+    disp.innerText = a;
+    Arr.length = 0;
+    mode = "add";
+    opArr.push(a);
+    console.log(opArr);
+    result = add(opArr[0], opArr[1]);
+    console.log(result);
+    opArr.length = 0;
+    opArr.push(result);
+    disp.innerText = result;
 
 })
