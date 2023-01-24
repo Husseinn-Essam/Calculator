@@ -17,7 +17,7 @@ function divi(a, b) {
         return a / b
     }
 }
-function input(Arr, start) {
+function input(Arr) {
 
     return Arr.reduce((accum, digit) => {
         return (accum * 10) + digit
@@ -25,8 +25,6 @@ function input(Arr, start) {
 }
 function operate(opArr, Arr, mode) {
     Arr.length = 0;
-
-    //a = opArr[0];
     opArr.push(a);
     if (mode == "add") {
         result = add(opArr[1], opArr[0]);
@@ -42,7 +40,7 @@ function operate(opArr, Arr, mode) {
     }
     opArr.length = 0;
     opArr.push(result);
-    disp.innerText = result;
+    disp.textContent = Math.round(result);
     mode = null;
 }
 const addKey = document.getElementById("add");
@@ -52,7 +50,7 @@ const diviKey = document.getElementById("divi");
 const equalKey = document.getElementById("equal");
 const disp = document.getElementById("display");
 const clearKey = document.getElementById("clear");
-const deleteKey = document.getElementById("delete")
+const deleteKey = document.getElementById("delete");
 let numKey = document.querySelectorAll(".num");
 
 let Arr = []
