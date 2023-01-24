@@ -10,7 +10,11 @@ function mult(a, b) {
 function divi(a, b) {
     return a / b;
 }
-
+function input(Arr) {
+    return Arr.reduce((accum, digit) => {
+        return (accum * 10) + digit
+    }, 0)
+}
 const addKey = document.getElementById("add");
 const subKey = document.getElementById("sub");
 const multiKey = document.getElementById("multi");
@@ -28,19 +32,18 @@ let mode;
 for (var i = 0; i < 10; i++) {
     numKey[i].addEventListener('click', (e) => {
         Arr.push(parseInt(e.target.textContent))
-        a = Arr.reduce((accum, digit) => {
-            return (accum * 10) + digit
-        }, 0)
-        console.log(a);
+        a = input(Arr)
+        //console.log(a);
         disp.innerText = a;
     })
 }
 
 addKey.addEventListener('click', () => {
     if (!mode) {
-
+        //clear the input arr and set mode to add
         Arr.length = 0;
         mode = "add";
+        //if op array doesnt contain a result
         if (opArr == 0) {
             opArr.push(a);
         }
@@ -48,9 +51,7 @@ addKey.addEventListener('click', () => {
 
     }
     else if (!mode && opArr != 0) {
-        a = Arr.reduce((accum, digit) => {
-            return (accum * 10) + digit
-        }, 0)
+        a = input(Arr)
         Arr.length = 0;
         mode = "add";
         opArr.push(a);
@@ -63,9 +64,7 @@ addKey.addEventListener('click', () => {
 
     }
     else {
-        a = Arr.reduce((accum, digit) => {
-            return (accum * 10) + digit
-        }, 0)
+        a = input(Arr)
         disp.innerText = a;
         Arr.length = 0;
         mode = "add";
@@ -81,9 +80,7 @@ addKey.addEventListener('click', () => {
 
 })
 equalKey.addEventListener('click', () => {
-    a = Arr.reduce((accum, digit) => {
-        return (accum * 10) + digit
-    }, 0)
+    a = input(Arr)
     disp.innerText = a;
     Arr.length = 0;
     mode = "add";
