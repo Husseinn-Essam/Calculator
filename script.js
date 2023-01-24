@@ -21,6 +21,9 @@ function operate(opArr, Arr, mode) {
     if (mode == "add") {
         result = add(opArr[0], opArr[1]);
     }
+    else if (mode == "sub") {
+        result = sub(opArr[0], opArr[1]);
+    }
     opArr.length = 0;
     opArr.push(result);
     disp.innerText = result;
@@ -43,14 +46,16 @@ for (var i = 0; i < 10; i++) {
     numKey[i].addEventListener('click', (e) => {
         Arr.push(parseInt(e.target.textContent))
         a = input(Arr)
-        //console.log(a);
         disp.innerText = a;
     })
 }
 
 addKey.addEventListener('click', () => {
-    if (!mode) {
+    if (mode != "add") {
         //clear the input arr and set mode to add
+        if (opArr != 0) {
+            operate(opArr, Arr, mode);
+        }
         Arr.length = 0;
         mode = "add";
         //if op array doesnt contain a result
@@ -62,16 +67,39 @@ addKey.addEventListener('click', () => {
     }
     else {
         a = input(Arr)
-        mode = "add";
+        //mode = "add";
         disp.innerText = a;
         operate(opArr, Arr, mode);
     }
 
 })
+subKey.addEventListener('click', () => {
+    if (mode != "sub") {
+        //clear the input arr and set mode to add
+        if (opArr != 0) {
+            operate(opArr, Arr, mode);
+        }
+        Arr.length = 0;
+        mode = "sub";
+        //if op array doesnt contain a result
+        if (opArr == 0) {
+            opArr.push(a);
+        }
+        console.log(opArr);
+
+    }
+    else {
+        a = input(Arr)
+        //mode = "add";
+        disp.innerText = a;
+        operate(opArr, Arr, mode);
+    }
+})
+
+
 equalKey.addEventListener('click', () => {
     a = input(Arr)
     disp.innerText = a;
-    mode = "add";
     operate(opArr, Arr, mode);
 
 })
