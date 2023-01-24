@@ -8,12 +8,24 @@ function multi(a, b) {
     return a * b;
 }
 function divi(a, b) {
-    return a / b;
+    return b == 0 ? disp.textContent = "ERROR" : a / b;
 }
-function input(Arr) {
-    return Arr.reduce((accum, digit) => {
-        return (accum * 10) + digit
-    })//we have removed the , 0  defualt value i did set for reduce , this fixed th chain problem of multi at a cost of removing the chain of the same op
+function input(Arr, start) {
+    try {
+        if (opArr.length == 0 && mode != null) {
+            throw "empty op"
+        }
+        return Arr.reduce((accum, digit) => {
+            return (accum * 10) + digit
+        })
+
+    }
+    catch (err) {
+        //console.log("ERROR")
+        mode = null;
+        // opArr.length = 0;
+        // opArr[0] = 1;
+    }
 }
 function operate(opArr, Arr, mode) {
     Arr.length = 0;
@@ -21,7 +33,7 @@ function operate(opArr, Arr, mode) {
     //a = opArr[0];
     opArr.push(a);
     if (mode == "add") {
-        result = add(opArr[0], opArr[1]);
+        result = add(opArr[1], opArr[0]);
     }
     else if (mode == "sub") {
         result = sub(opArr[0], opArr[1]);
@@ -35,6 +47,7 @@ function operate(opArr, Arr, mode) {
     opArr.length = 0;
     opArr.push(result);
     disp.innerText = result;
+    mode = null;
 }
 const addKey = document.getElementById("add");
 const subKey = document.getElementById("sub");
@@ -63,13 +76,16 @@ addKey.addEventListener('click', () => {
         //clear the input arr and set mode to add
         if (opArr != 0) {
             operate(opArr, Arr, mode);
+
         }
         Arr.length = 0;
         mode = "add";
+
         //if op array doesnt contain a result
         if (opArr == 0) {
             opArr.push(a);
         }
+        a = 0;
         console.log(opArr);
 
     }
@@ -89,10 +105,12 @@ subKey.addEventListener('click', () => {
         }
         Arr.length = 0;
         mode = "sub";
+
         //if op array doesnt contain a result
         if (opArr == 0) {
             opArr.push(a);
         }
+        a = 0;
         console.log(opArr);
     }
     else {
@@ -114,6 +132,7 @@ multiKey.addEventListener('click', () => {
         if (opArr == 0) {
             opArr.push(a);
         }
+        a = 1;
         console.log(opArr);
     }
     else {
@@ -135,6 +154,7 @@ diviKey.addEventListener('click', () => {
         if (opArr == 0) {
             opArr.push(a);
         }
+        a = 1;
         console.log(opArr);
     }
     else {
@@ -146,8 +166,10 @@ diviKey.addEventListener('click', () => {
 })
 
 equalKey.addEventListener('click', () => {
-    a = input(Arr)
-    disp.innerText = a;
-    operate(opArr, Arr, mode);
-
+    if (opArr.length >= 1) {
+        a = input(Arr)
+        disp.innerText = a;
+        operate(opArr, Arr, mode);
+        mode = null;
+    }//checks if all inputs are ready ==2
 })
