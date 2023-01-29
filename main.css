@@ -61,7 +61,7 @@ body {
     align-items: flex-end;
     border: 2px solid black;
     font-family: 'Calculator', sans-serif;
-    overflow: auto;
+    overflow: hidden;
 }
 
 #equal {
